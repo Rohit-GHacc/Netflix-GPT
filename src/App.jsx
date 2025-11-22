@@ -1,9 +1,9 @@
+import Body from './components/Body'
 function App() {
+  
   return (
     <>
-      <h1 className = 'font-bold'>
-        This is NETFLIX GPT
-      </h1>
+      <Body/>
     </>
   )
 }
