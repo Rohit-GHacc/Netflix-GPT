@@ -4,24 +4,31 @@ import checkValidation from "../utils/checkValidation";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { addUser } from "../utils/userSlice";
+
 
 const Login = () => {
   const [isRegistered, setIsRegistered] = React.useState(true);
   const [message, setMessage] = React.useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const email = useRef(null);
+  const password = useRef(null);
+  const name = useRef(null);
   const handleIsRegistered = () => {
     setIsRegistered(!isRegistered);
   };
 
-  const email = useRef();
-  const password = useRef();
 
   const handleClick = (e) => {
     e.preventDefault();
-    console.log(email.current.value);
-    console.log(password.current.value);
     setMessage(checkValidation(email.current.value, password.current.value));
+    console.log("message", message)
     if (message) return;
 
     if (!isRegistered) {
@@ -34,7 +41,18 @@ const Login = () => {
         .then((userCredential) => {
           // Signed up
           const user = userCredential.user;
-          console.log(user);
+          updateProfile(user, {
+            displayName: name.current.value,
+            photoURL: "https://example.com/jane-q-user/profile.jpg",
+          })
+            .then(() => {
+              const {uid, displayName, email, photoURL} = auth.currentUser;
+              console.log("reached here in signed up ")
+              dispatch(addUser({uid : uid, email: email, displayName: displayName, photoURL: photoURL}))
+            })
+            .catch((error) => {
+              setMessage(error.message);
+            });
           // ...
         })
         .catch((error) => {
@@ -79,6 +97,7 @@ const Login = () => {
         <div className="flex flex-col items-center">
           {!isRegistered && (
             <input
+              ref = {name}
               type="text"
               placeholder="Full Name"
               className="p-4 m-4 bg-gray-900 opacity-50 rounded-sm w-3/4 mx-auto px-auto border border-gray-500"
@@ -96,7 +115,9 @@ const Login = () => {
             className="p-4 m-4   bg-gray-900 opacity-50 border border-gray-500 rounded-sm w-3/4 mx-auto px-auto"
             ref={password}
           />
-          <p className="p-2 m-2 text-red-700 font-bold w-3/4">{message && message}</p>
+          <p className="p-2 m-2 text-red-700 font-bold w-3/4">
+            {message && message}
+          </p>
           <button
             className="bg-red-700 p-4 w-3/4 m-4 rounded-lg cursor-pointer hover:bg-red-800"
             onClick={handleClick}
