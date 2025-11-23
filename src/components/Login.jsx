@@ -10,7 +10,7 @@ import { auth } from "../utils/firebase";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addUser } from "../utils/userSlice";
-
+import {PHOTO_URL , NETFLIX_LOGO} from '../utils/constants'
 
 const Login = () => {
   const [isRegistered, setIsRegistered] = React.useState(true);
@@ -43,7 +43,7 @@ const Login = () => {
           const user = userCredential.user;
           updateProfile(user, {
             displayName: name.current.value,
-            photoURL: "https://example.com/jane-q-user/profile.jpg",
+            photoURL: PHOTO_URL,
           })
             .then(() => {
               const {uid, displayName, email, photoURL} = auth.currentUser;
@@ -86,7 +86,7 @@ const Login = () => {
       <Header />
       <img
         className="absolute"
-        src="https://assets.nflxext.com/ffe/siteui/vlv3/a92ac6d9-e542-40d5-9bb1-bb7291e4de86/web/IN-en-20251117-TRIFECTA-perspective_9fe28c81-2209-4e08-b8bd-98cfa9f97a8f_large.jpg"
+        src={NETFLIX_LOGO}
       />
       <div className="w-full absolute inset-0 bg-black/40  "></div>
       <form className="bg-black/75 absolute w-1/3 text-white top-1/6 left-1/3 py-10 rounded-lg">
