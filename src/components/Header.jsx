@@ -35,7 +35,7 @@ const Header = () => {
         </svg>
       </div>
       {auth.currentUser && <button
-        className="bg-red-700 text-white font-bold text-lg cursor-pointer px-4 m-2"
+        className="bg-red-700 text-white font-bold text-lg cursor-pointer rounded-2xl mx-20 my-5 px-4 m-2"
         onClick={handleSignOut}
       >
         {" "}
