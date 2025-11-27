@@ -2,10 +2,12 @@ import React from "react";
 import { signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { changeGptSearchStatus } from "../utils/gptSearchSlice";
 
 const Header = () => {
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
@@ -16,6 +18,9 @@ const Header = () => {
         console.log(error)
       });
   };
+  const handleGptSearchClick = ()=>{
+    dispatch(changeGptSearchStatus());
+  }
   return (
     <div className = 'flex justify-between absolute z-10 w-screen'>
       <div className="text-red-700 w-44 cursor-pointer left-4 right-4 p-4 mx-40 my-4">
@@ -34,13 +39,20 @@ const Header = () => {
           </g>
         </svg>
       </div>
-      {auth.currentUser && <button
-        className="bg-red-700 text-white font-bold text-lg cursor-pointer rounded-2xl mx-20 my-5 px-4 m-2"
+      {auth.currentUser && (
+        <div>
+          <button className = 'text-white bg-blue-400 hover:bg-blue-600 px-4 py-2 rounded-2xl cursor-pointer' onClick = {handleGptSearchClick}> GPT Search</button>
+        <button
+        className="bg-red-600 hover:bg-red-700 text-white font-bold text-lg cursor-pointer rounded-2xl mx-20 my-5 py-2 px-4 m-2"
         onClick={handleSignOut}
       >
         {" "}
         Sign Out
-      </button>}
+      </button>
+      
+      </div>
+      )
+      }
     </div>
   );
 };
