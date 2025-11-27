@@ -26,8 +26,7 @@ const Body = () => {
   }, [dispatch, navigate]);
   return (
     <>
-      {" "}
-      <Outlet />{" "}
+      <Outlet />
     </>
   );
 };
