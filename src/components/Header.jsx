@@ -2,12 +2,14 @@ import React from "react";
 import { signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { changeGptSearchStatus } from "../utils/gptSearchSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { changeGptSearchStatus, changeLanguage } from "../utils/gptSearchSlice";
 
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const gptSearchStatus = useSelector(store=> store.gptSearch?.gptSearchStatus)
+  console.log("gptSearchStatus", gptSearchStatus)
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
@@ -20,6 +22,9 @@ const Header = () => {
   };
   const handleGptSearchClick = ()=>{
     dispatch(changeGptSearchStatus());
+  }
+  const handleChangeLanguage = (e)=>{
+    dispatch(changeLanguage(e.target.value))
   }
   return (
     <div className = 'flex justify-between absolute z-10 w-screen'>
@@ -41,9 +46,17 @@ const Header = () => {
       </div>
       {auth.currentUser && (
         <div>
-          <button className = 'text-white bg-blue-400 hover:bg-blue-600 transition-colors duration-300 px-4 py-2 rounded-2xl cursor-pointer' onClick = {handleGptSearchClick}> GPT Search</button>
+          { gptSearchStatus && (
+          <select className = 'bg-gray-500 hover:bg-gray-600 transition-colors duration-300 text-white py-2 px-4 mr-4 cursor-pointer rounded-2xl' onChange = {handleChangeLanguage}>
+            <option value={"English"}> English</option>
+            <option value={"Hindi"}> Hindi</option>
+            <option value={"Spanish"}> Spanish</option>
+          </select>
+          ) 
+        }
+          <button className = 'text-white bg-blue-400 hover:bg-blue-600 transition-colors duration-300 px-4 py-2 rounded-2xl cursor-pointer' onClick = {handleGptSearchClick}> {gptSearchStatus ? "Home":"GPT Search"}</button>
         <button
-        className="bg-red-600 hover:bg-red-700 transition-colors duration-300 text-white font-bold text-lg cursor-pointer rounded-2xl mx-20 my-5 py-2 px-4 m-2"
+        className="bg-red-600 hover:bg-red-700 transition-colors duration-300 text-white font-bold text-lg cursor-pointer rounded-2xl mr-20 ml-4 my-5 py-2 px-4 m-2"
         onClick={handleSignOut}
       >
         {" "}
