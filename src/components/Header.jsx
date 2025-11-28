@@ -41,9 +41,9 @@ const Header = () => {
       </div>
       {auth.currentUser && (
         <div>
-          <button className = 'text-white bg-blue-400 hover:bg-blue-600 px-4 py-2 rounded-2xl cursor-pointer' onClick = {handleGptSearchClick}> GPT Search</button>
+          <button className = 'text-white bg-blue-400 hover:bg-blue-600 transition-colors duration-300 px-4 py-2 rounded-2xl cursor-pointer' onClick = {handleGptSearchClick}> GPT Search</button>
         <button
-        className="bg-red-600 hover:bg-red-700 text-white font-bold text-lg cursor-pointer rounded-2xl mx-20 my-5 py-2 px-4 m-2"
+        className="bg-red-600 hover:bg-red-700 transition-colors duration-300 text-white font-bold text-lg cursor-pointer rounded-2xl mx-20 my-5 py-2 px-4 m-2"
         onClick={handleSignOut}
       >
         {" "}

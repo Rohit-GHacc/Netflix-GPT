@@ -1,5 +1,5 @@
 export const PHOTO_URL = "https://example.com/jane-q-user/profile.jpg";
-export const NETFLIX_LOGO = "https://assets.nflxext.com/ffe/siteui/vlv3/a92ac6d9-e542-40d5-9bb1-bb7291e4de86/web/IN-en-20251117-TRIFECTA-perspective_9fe28c81-2209-4e08-b8bd-98cfa9f97a8f_large.jpg"
+export const NETFLIX_BG = "https://assets.nflxext.com/ffe/siteui/vlv3/a92ac6d9-e542-40d5-9bb1-bb7291e4de86/web/IN-en-20251117-TRIFECTA-perspective_9fe28c81-2209-4e08-b8bd-98cfa9f97a8f_large.jpg"
 
 export const API_OPTIONS = {
   method: 'GET',

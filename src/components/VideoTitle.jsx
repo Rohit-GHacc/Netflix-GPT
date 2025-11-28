@@ -5,8 +5,8 @@ const VideoTitle = ({title, overview}) => {
      <h1 className = 'font-bold text-5xl mt-20'> {title} </h1>
       <p className = 'py-4 text-2xl'> {overview.substring(0,200)}... </p>
       <div className = 'flex'>
-        <button className = 'px-8 py-4 bg-white hover:bg-opacity-50 text-black text-lg bg-opacity-1/2 m-2 rounded-lg flex  items-center cursor-pointer'> <span className = 'text-2xl mr-2'>▶</span> <span>Play </span></button>
-        <button className = 'px-8 py-4 bg-gray-400 bg-opacity-50 text-white text-lg bg-opacity-1/2 m-2 rounded-lg cursor-pointer hover:bg-gray-500'> More Info </button>
+        <button className = 'px-8 py-4 bg-white hover:bg-opacity-50 text-black text-lg bg-opacity-1/2 m-2 rounded-lg flex  items-center cursor-pointer hover:bg-gray-100 transition-colors duration-300'> <span className = 'text-2xl mr-2'>▶</span> <span>Play </span></button>
+        <button className = 'px-8 py-4 bg-gray-400 bg-opacity-50 text-white text-lg bg-opacity-1/2 m-2 rounded-lg cursor-pointer hover:bg-gray-500 transition-colors duration-300'> More Info </button>
       </div>
     </div>
   )

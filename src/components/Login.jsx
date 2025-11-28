@@ -10,7 +10,7 @@ import { auth } from "../utils/firebase";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addUser } from "../utils/userSlice";
-import {PHOTO_URL , NETFLIX_LOGO} from '../utils/constants'
+import {PHOTO_URL , NETFLIX_BG} from '../utils/constants'
 
 const Login = () => {
   const [isRegistered, setIsRegistered] = React.useState(true);
@@ -84,9 +84,10 @@ const Login = () => {
   return (
     <div>
       <Header />
+       {/* background */}
       <img
         className="absolute"
-        src={NETFLIX_LOGO}
+        src={NETFLIX_BG}
       />
       <div className="w-full absolute inset-0 bg-black/40  "></div>
       <form className="bg-black/75 absolute w-1/3 text-white top-1/6 left-1/3 py-10 rounded-lg">
@@ -119,7 +120,7 @@ const Login = () => {
             {message && message}
           </p>
           <button
-            className="bg-red-700 p-4 w-3/4 m-4 rounded-lg cursor-pointer hover:bg-red-800"
+            className="bg-red-700 p-4 w-3/4 m-4 rounded-lg cursor-pointer hover:bg-red-800 transition-colors duration-300"
             onClick={handleClick}
           >
             {" "}
